@@ -5,11 +5,9 @@ SHELL	["/bin/ash", "-xeuo", "pipefail", "-c"]
 RUN	apk update; \
 	apk add --update --upgrade --no-cache build-base git
 
-RUN	git clone --progress https://github.com/wolfcw/libfaketime /usr/src/libfaketime
-
 WORKDIR	/usr/src/libfaketime
-
-RUN	make -j"$(nproc)"; \
+RUN	git clone --progress https://github.com/wolfcw/libfaketime /usr/src/libfaketime; \
+	make -j"$(nproc)"; \
 	make install
 
 FROM	alpine
